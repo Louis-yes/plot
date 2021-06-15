@@ -1,7 +1,3 @@
-                                        
-                                        
-                                        
-                                        
 *plot is a tool I made*
 *for making little gardens*                                    
                                         
