@@ -2,8 +2,8 @@
                                         
                                         
                                         
-    *plot is a tool i made*
-    *for making little gardens*                                    
+*plot is a tool I made*
+*for making little gardens*                                    
                                         
     🌱🌱🌱🌱🌱🌱🌱🌱🌱🌱                
         🌱🌱🌱🌱🌱🌱🌱🌱🌱              
