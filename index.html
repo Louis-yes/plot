@@ -165,12 +165,22 @@
       h: 20,
       w: 20
     };
-    window.cursor = { isClicked: false };
+
+    window.cursor = { 
+      isClicked: false,
+      activeTouch: false 
+    };
     document.addEventListener("mousedown", function(e) {
       window.cursor.isClicked = true;
     });
     document.addEventListener("mouseup", function(e) {
       window.cursor.isClicked = false;
+    });
+    document.addEventListener("touchstart", function(e) {
+       window.cursor.activeTouch = true; 
+    });
+    document.addEventListener("touchend", function(e) {
+       window.cursor.activeTouch = false; 
     });
 
     const emojis = [
@@ -244,7 +254,7 @@
 
     function placeEmoji(e) {
       const tt = e.target;
-      if (tt.tagName.toLowerCase() == "td") {
+      if (tt && tt.tagName.toLowerCase() == "td") {
         if (tt.innerHTML == state.currentEmoji) {
           if (e.type == "mousedown") {
             tt.innerHTML = state.spacer;
@@ -268,6 +278,17 @@
           placeEmoji(e);
         }
       });
+      plot.addEventListener("touchmove", function(e){
+        if(window.cursor.activeTouch){
+          // console.log(e);
+          var event = {
+            target: document.elementFromPoint(e.touches[0].clientX, e.touches[0].clientY), 
+            type: "touchmove",
+          }
+          placeEmoji(event);
+        }
+        })
+
     }
 
     function initialisePlot() {
