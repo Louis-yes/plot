@@ -64,6 +64,7 @@
         padding:5px;
         width: 100%;
         grid-area: PLOT;
+        margin: 20px 0;
         border: 1px solid var(--green);
       }
       #plot.html {
@@ -104,13 +105,21 @@
       #actions {
         grid-area: ACTIONS;
         text-align: right;
+
+        display: flex;
+        justify-content: space-between;
       }
 
       #actions .action {
+        padding: 18px;
+        border: 1px solid;
+        box-sizing: border-box;
+        border-radius: 5px;
         color: var(--grassy);
         font-style: italic;
-        display: inline-block;
-        margin-right: 10px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
         text-decoration: none;
         cursor: pointer;
       }
@@ -121,6 +130,9 @@
 
       #actions .action.active {
         text-decoration: underline;
+        
+        background: var(--green);
+        color: var(--lush);
       }
 
       footer {
@@ -141,6 +153,25 @@
             "TOOLS PLOT"
             "FOOTER FOOTER";
         }
+
+        #plot {
+          margin: 0;
+        }
+
+        #actions {
+          justify-content: flex-end;
+        }
+
+        #actions .action {
+          display: inline-block;
+          padding: 0 12px;
+          border:none;
+        }
+
+        #actions .action.active {
+          background: none;
+        }
+
         #plot {
           width: 400px;
         }
@@ -150,8 +181,8 @@
   <body>
     <div id="app">
       <div id="actions"></div>
-      <div id="tools"></div>
       <div id="plot" class="garden"></div>
+      <div id="tools"></div>
       <footer>
         <p>Made by <a href="https://yesthisislouis.com">Louis</a> for fun</p>
       </footer>
@@ -215,6 +246,11 @@
       fillPlot(plot_to_html(state.plot));
       measurePlot();
     }
+
+    window.addEventListener("resize",debounce(function(e){
+      measurePlot();
+    }));
+
 
     // TOOL SETUP
     function emojiCursorCSS(emoji) {
@@ -456,6 +492,15 @@
       style.innerHTML = content;
       return style;
     }
+    //debounce
+    function debounce(func) {
+      var timer;
+      return function(event) {
+        if (timer) clearTimeout(timer);
+        timer = setTimeout(func,100,event);
+      };
+    }
+    
     init();
   </script>
 </html>
